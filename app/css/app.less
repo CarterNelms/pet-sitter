@@ -1,0 +1,209 @@
+@innerBorder: 1px solid black;
+@pageWidth: 1024px;
+@petMargin: 5px;
+@panelWidth: @pageWidth/4-@petMargin;
+@imgHeight: 225px;
+@statusBarWrapWidthPercent: 75%;
+
+body{
+  overflow-y: scroll;
+}
+
+#page-wrap{
+  width: @pageWidth;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#page-wrap > *{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#controls{
+  text-align: center;
+}
+
+#pets{
+  float: left;
+  width: 100%;
+
+  .pet{
+    width: @panelWidth;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 3px;
+    display: inline-block;
+    margin-right: @petMargin;
+    margin-bottom: @petMargin;
+    vertical-align: top;
+
+
+    .container {
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      width: 100%;
+      height: 100%;
+    
+      .flipper {
+        transform-style: preserve-3d;
+        -webkit-transition-duration: 1.5s;
+        -moz-transition-duration: 1.5s;
+        -ms-transition-duration: 1.5s;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .back, .front {
+          position: absolute;
+          top: 0;
+          left: 0;
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
+          -ms-backface-visibility: hidden;
+          width: 100%;
+          height: 100%;
+        }
+
+        .back{
+          width: @panelWidth;
+          min-height: @imgHeight;
+          text-align: center;
+          font-size: 24px;
+          font-weight: bold;
+          background-color: red;
+          > img{
+            max-width: 100%;
+            height: auto;
+          }
+        }
+
+        .front{
+          z-index: 10;
+
+          *{
+            vertical-align: top;    
+          }
+
+          .petImgWrap{
+            width: 100%;
+            height: @imgHeight;
+            background-color: darkgrey;
+            margin: 0 auto;
+            text-align: left;
+            border: 2px solid black;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+
+            .petImg{
+              max-width: 100%;
+              max-height: 100%;
+              margin-left: auto;
+              margin-right: auto;
+            }
+          }
+
+          .title{
+            position: relative;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            padding: 5px;
+            background-color: #141414;
+            color: white;
+            font-weight: bold;
+            border: 2px solid black;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+
+            .interactions{
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              cursor: pointer;
+
+              > div{
+                min-width: 30px;
+                min-height: 15px;
+                background-color: white;
+                color: black;
+                border: @innerBorder;
+              }
+
+              // .eat{
+              //   min-width: 30px;
+              //   min-height: 15px;
+              //   background-color: rgba(255, 255, 255, 0.85);
+              //   color: black;
+              //   border: @innerBorder;
+              // }
+            }
+          }
+
+          .status{
+            text-align: left;
+            height: 75px;
+            background-color: lightgrey;
+            border: 2px solid black;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+
+            > div{
+              display: inline-block;
+            }
+
+            .statusName{
+              width: 100% - @statusBarWrapWidthPercent;
+            }
+
+            .statusName:first-child{
+              border-top: @innerBorder;
+            }
+
+            .statusBarWrap{
+              width: @statusBarWrapWidthPercent;
+              height: 100% / 3;
+              border-top: @innerBorder;
+              border-left: @innerBorder;
+              box-sizing: border-box;
+              -moz-box-sizing: border-box;
+
+              .statusBar{
+                width: 100%;
+                height: 80%;
+                margin: 1.1% 0;
+              }
+
+              .healthBar{
+                background-color: blue;
+              }
+
+              .fullnessBar{
+                background-color: green;
+              }
+
+              .moodBar{
+                background-color: red;
+              }
+            }
+          }
+          ::selection {
+            background: rgba(0, 0, 0, 0);
+            /* Safari */
+          }
+          ::-moz-selection {
+            background: rgba(0, 0, 0, 0);
+            /* Firefox */
+          }
+        }
+      }
+    }
+  }
+}
+
+.back,
+.dead {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+}
